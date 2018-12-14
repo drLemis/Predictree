@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+
+<head>
+    <title>Predictree</title>
+
+    <style>
+        hr {
+            margin-top: 0em;
+            margin-bottom: 0em;
+            border-width: 5px;
+        }
+
+        .footer {
+            position: fixed;
+            text-align: center;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            width: 100%;
+            background-color: grey;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" class="input" onkeyup="displayList(getPredictions(this.value.toString()));" disabled />
+    <nav>
+        <ul class="list" style="padding:0">
+            <li>Please, wait for loading of 100k list of words...</li>
+        </ul>
+    </nav>
+
+    <div class="footer">2018.12.15, v1.00</div>
+    <script src="interface.js"></script>
+    <script src="treeLeaf.js"></script>
+    <script src="prediction.js"></script>
+</body>
+
+</html>
