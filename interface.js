@@ -1,6 +1,6 @@
 function displayList(array) {
 	if (array.length < 1 && isLoaded) {
-		array = ["Ready to use! Input any lowercase letter!"];
+		array = ["Ready to use! Input any two lowercase letters!"];
 	} else if (array.length < 1 && !isLoaded) {
 		array = ["Please, wait for loading of 370k list of words..."];
 	}
@@ -46,7 +46,6 @@ function getJSON() {
 	fetch(url)
 		.then(res => res.json())
 		.then((out) => {
-			console.log('Checkout this JSON!');
 			isLoaded = true;
 			document.getElementsByClassName('input')[0].disabled = false;
 			displayList([]);
@@ -60,12 +59,10 @@ function getText() {
 	let url = 'https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt';
 	
 	function reqListener () {
-		console.log('Checkout this Text!');
 		isLoaded = true;
 		document.getElementsByClassName('input')[0].disabled = false;
 		displayList([]);
 		var array = listToArray(this.responseText);
-		console.log(array)
 		dummyBranches(array);
 	}
 	

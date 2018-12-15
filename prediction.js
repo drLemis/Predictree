@@ -23,7 +23,7 @@ function predictBranch(startFrom, predictions) {
 
 function getPredictions(input) {
 	var predictions = [];
-	if (input) {
+	if (input && input.length > 1) {
 		var leaf = root;
 		input.split("").forEach(element => {
 			if (leaf && leaf.getChild(element)) {
