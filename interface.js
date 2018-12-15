@@ -2,7 +2,7 @@ function displayList(array) {
 	if (array.length < 1 && isLoaded) {
 		array = ["Ready to use! Input any lowercase letter!"];
 	} else if (array.length < 1 && !isLoaded) {
-		array = ["Please, wait for loading of 100k list of words..."];
+		array = ["Please, wait for loading of 370k list of words..."];
 	}
 
 	// Get a container element
@@ -30,8 +30,19 @@ function displayList(array) {
 	}
 }
 
+function listToArray(input) {
+	var result = [];
+	
+	input.split("\n").forEach(element => {
+		result.push(element);
+	});
+
+	return result;
+}
+
 function getJSON() {
 	let url = 'https://random-word-api.herokuapp.com/word?key=4B4IXS2K&number=100000';
+
 	fetch(url)
 		.then(res => res.json())
 		.then((out) => {
@@ -43,4 +54,23 @@ function getJSON() {
 		})
 		.catch(err => { throw err });
 
+}
+
+function getText() {
+	let url = 'https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt';
+	
+	function reqListener () {
+		console.log('Checkout this Text!');
+		isLoaded = true;
+		document.getElementsByClassName('input')[0].disabled = false;
+		displayList([]);
+		var array = listToArray(this.responseText);
+		console.log(array)
+		dummyBranches(array);
+	}
+	
+	var oReq = new XMLHttpRequest();
+	oReq.addEventListener("load", reqListener);
+	oReq.open("GET", url);
+	oReq.send();
 }

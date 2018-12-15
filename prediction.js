@@ -16,8 +16,8 @@ function predictBranch(startFrom, predictions) {
 
 	var test = startFrom.getAllChilds();
 
-	for (var s of Object.keys(test)) {
-		predictBranch(startFrom.getChild(s), predictions);
+	for (var child of Object.keys(test)) {
+		predictBranch(startFrom.getChild(child), predictions);
 	}
 }
 
@@ -38,5 +38,3 @@ function getPredictions(input) {
 
 	return predictions;
 }
-
-// console.log(getPredictions("1".toString()));

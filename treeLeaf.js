@@ -88,8 +88,9 @@ function createBranch(input) {
 
 var root = createLeaf();
 var isLoaded = false;
-displayList(["Please, wait for loading of 100k list of words..."]);
-getJSON();
+displayList(["Please, wait for loading of 370k list of words..."]);
+// getJSON();
+getText();
 
 function dummyBranches(data) {
 	data.forEach(element => {
