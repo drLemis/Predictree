@@ -21,9 +21,10 @@ function predictBranch(startFrom, predictions) {
 	}
 }
 
-function getPredictions(input) {
+function getPredictions() {
+	var input = document.getElementById('inputField').value.toString();
 	var predictions = [];
-	if (input) {
+	if (input && input.length > 1) {
 		var leaf = root;
 		input.split("").forEach(element => {
 			if (leaf && leaf.getChild(element)) {
@@ -34,9 +35,25 @@ function getPredictions(input) {
 		});
 
 		predictBranch(leaf, predictions);
-	}
 
+
+		if (document.getElementById('startFromMiddle').checked) {
+			tableGetByValue(input.substring(0, 1)).forEach(leaf => {
+				if (leaf != undefined && leaf != root.getChild(input.substring(0, 1))) {
+					var letters = input.substring(1).split("");
+					for (let index = 0; index < letters.length; index++) {
+						var element = letters[index];
+						if (element != undefined && leaf.getChild(element)) {
+							leaf = leaf.getChild(element);
+						} else {
+							leaf = undefined;
+							break;
+						}
+					}
+					predictBranch(leaf, predictions);
+				}
+			});
+		}
+	}
 	return predictions;
 }
-
-// console.log(getPredictions("1".toString()));

@@ -25,15 +25,25 @@
 </head>
 
 <body>
-    <input type="text" class="input" onkeyup="displayList(getPredictions(this.value.toString()));" disabled />
+    <div id="blockTop" style="display: none">
+        <input type="checkbox" id="startFromMiddle" onChange="displayList(getPredictions());" >Start from middle (slow on short input)</input>
+        <br>
+        <br>
+        <input type="text" class="input" id="inputField" onkeyup="displayList(getPredictions());" />
+    </div>
     <nav>
         <ul class="list" style="padding:0">
-            <li>Please, wait for loading of 100k list of words...</li>
+            <li><input type="button" onclick="getText('extrashort')" value="Load 4k words dictionary (36 KB of data)" /></li>
+            <li />
+            <li><input type="button" onclick="getText('short')" value="Load 114k words dictionary (1 MB of data)" /></li>
+            <li />
+            <li><input type="button" onclick="getText('long')" value="Load 370k words dictionary (4 MB of data)" /></li>
         </ul>
     </nav>
 
-    <div class="footer">2018.12.15, v1.00</div>
+    <div class="footer">2018.12.15, v1.10</div>
     <script src="interface.js"></script>
+    <script src="table.js"></script>
     <script src="treeLeaf.js"></script>
     <script src="prediction.js"></script>
 </body>

@@ -1,8 +1,8 @@
 function displayList(array) {
 	if (array.length < 1 && isLoaded) {
-		array = ["Ready to use! Input any lowercase letter!"];
+		array = ["Ready to use! Input any two lowercase letters!"];
 	} else if (array.length < 1 && !isLoaded) {
-		array = ["Please, wait for loading of 100k list of words..."];
+		array = [""];
 	}
 
 	// Get a container element
@@ -30,17 +30,44 @@ function displayList(array) {
 	}
 }
 
-function getJSON() {
-	let url = 'https://random-word-api.herokuapp.com/word?key=4B4IXS2K&number=100000';
-	fetch(url)
-		.then(res => res.json())
-		.then((out) => {
-			console.log('Checkout this JSON!');
-			isLoaded = true;
-			document.getElementsByClassName('input')[0].disabled = false;
-			displayList([]);
-			dummyBranches(out);
-		})
-		.catch(err => { throw err });
+function listToArray(input) {
+	var result = [];
 
+	input.split("\n").forEach(element => {
+		result.push(element);
+	});
+
+	return result;
+}
+
+function getText(type = "extrashort") {
+	let url = "";
+	switch (type) {
+		case "long":
+			url = 'https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt';
+			displayList(["Loading 4k dictionary..."]);
+			break;
+		case "short":
+		url = 'https://raw.githubusercontent.com/ciamkr/English-words-list/master/OfficialCrosswords';
+			displayList(["Loading 370k dictionary..."]);
+			break;
+		default:
+			url = 'https://raw.githubusercontent.com/ciamkr/English-words-list/master/OfficialCrosswordsDelta';
+			displayList(["Loading 114k dictionary..."]);
+			break;
+	}
+
+	function reqListener () {
+		isLoaded = true;
+		document.getElementById('blockTop').style = "";
+		displayList([]);
+		var array = listToArray(this.responseText);
+		console.log(array.length)
+		dummyBranches(array);
+	}
+
+	var oReq = new XMLHttpRequest();
+	oReq.addEventListener("load", reqListener);
+	oReq.open("GET", url);
+	oReq.send();
 }

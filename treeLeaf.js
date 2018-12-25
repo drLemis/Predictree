@@ -52,12 +52,15 @@ function treeLeaf() {
 	};
 }
 
-function createLeaf(value, parent) {
+function createLeaf(value, parent = undefined) {
 	var leaf = new treeLeaf();
 	leaf.setValue(value);
 	if (parent) {
 		parent.addChild(leaf);
 		leaf.setParent(parent);
+	}
+	if (parent) {
+		tableAddLeaf(leaf);
 	}
 	return leaf;
 }
@@ -88,19 +91,10 @@ function createBranch(input) {
 
 var root = createLeaf();
 var isLoaded = false;
-displayList(["Please, wait for loading of 100k list of words..."]);
-getJSON();
+// getText();
 
 function dummyBranches(data) {
 	data.forEach(element => {
 		createBranch(element.toString());
 	});
 }
-
-// createBranch("ABCDE".toString());
-// createBranch("ABBA".toString());
-// createBranch("ABRA".toString());
-// createBranch("BARBARA".toString());
-// createBranch("12345".toString());
-// createBranch("1223123".toString());
-// createBranch("1999".toString());
