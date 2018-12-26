@@ -45,15 +45,15 @@ function getText(type = "extrashort") {
 	switch (type) {
 		case "long":
 			url = 'https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt';
-			displayList(["Loading 4k dictionary..."]);
+			displayList(["Loading 370k dictionary..."]);
 			break;
 		case "short":
 		url = 'https://raw.githubusercontent.com/ciamkr/English-words-list/master/OfficialCrosswords';
-			displayList(["Loading 370k dictionary..."]);
+		displayList(["Loading 114k dictionary..."]);
 			break;
 		default:
 			url = 'https://raw.githubusercontent.com/ciamkr/English-words-list/master/OfficialCrosswordsDelta';
-			displayList(["Loading 114k dictionary..."]);
+			displayList(["Loading 4k dictionary..."]);
 			break;
 	}
 
