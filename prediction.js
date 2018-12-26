@@ -55,5 +55,7 @@ function getPredictions() {
 			});
 		}
 	}
+
+	document.getElementById('labelCounter').innerText = predictions.length+" words"
 	return predictions;
 }
