@@ -48,8 +48,8 @@ function getText(type = "extrashort") {
 			displayList(["Loading 370k dictionary..."]);
 			break;
 		case "short":
-		url = 'https://raw.githubusercontent.com/ciamkr/English-words-list/master/OfficialCrosswords';
-		displayList(["Loading 114k dictionary..."]);
+			url = 'https://raw.githubusercontent.com/ciamkr/English-words-list/master/OfficialCrosswords';
+			displayList(["Loading 114k dictionary..."]);
 			break;
 		default:
 			url = 'https://raw.githubusercontent.com/ciamkr/English-words-list/master/OfficialCrosswordsDelta';
@@ -57,7 +57,7 @@ function getText(type = "extrashort") {
 			break;
 	}
 
-	function reqListener () {
+	function reqListener() {
 		isLoaded = true;
 		document.getElementById('blockTop').style = "";
 		displayList([]);
@@ -70,4 +70,31 @@ function getText(type = "extrashort") {
 	oReq.addEventListener("load", reqListener);
 	oReq.open("GET", url);
 	oReq.send();
+}
+
+// ========
+
+// for local use only
+
+function readSingleFile() {
+	var input = document.createElement('input');
+	input.type = 'file';
+
+	input.onchange = e => {
+		var file = e.target.files[0];
+		if (!file) {
+			return;
+		}
+		var reader = new FileReader();
+		reader.onload = function (e) {
+			document.getElementById('blockTop').style = "";
+			displayList([]);
+			var array = listToArray(e.target.result);
+			console.log(array.length)
+			dummyBranches(array);
+		};
+		reader.readAsText(file);
+	};
+
+	input.click();
 }
