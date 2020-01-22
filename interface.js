@@ -95,6 +95,6 @@ function readSingleFile() {
 		};
 		reader.readAsText(file);
 	};
-
+	
 	input.click();
 }
